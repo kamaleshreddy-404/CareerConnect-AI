@@ -10,7 +10,7 @@
 %>
 <nav class="navbar">
   <div class="container nav-container">
-    <a href="index.jsp" class="logo">
+    <a href="index.html" class="logo">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
         <rect x="2" y="6" width="20" height="14" rx="2"/>
@@ -19,7 +19,7 @@
     </a>
 
     <ul class="nav-links">
-      <li><a href="index.jsp" class="nav-link">Home</a></li>
+      <li><a href="index.html" class="nav-link">Home</a></li>
       <li><a href="jobs.jsp" class="nav-link">Browse Jobs</a></li>
       <% if (currentUser != null) { %>
         <% if ("ADMIN".equals(currentUser.getRole())) { %>

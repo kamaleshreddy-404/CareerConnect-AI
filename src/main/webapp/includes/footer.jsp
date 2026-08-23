@@ -38,10 +38,10 @@
       <div class="footer-col">
         <h4>Platform & Tech</h4>
         <ul class="footer-links">
-          <li><a href="index.jsp">MVC Architecture</a></li>
-          <li><a href="index.jsp">JDBC Connection</a></li>
-          <li><a href="index.jsp">Apache Tomcat</a></li>
-          <li><a href="index.jsp">Maven Build</a></li>
+          <li><a href="index.html">MVC Architecture</a></li>
+          <li><a href="index.html">JDBC Connection</a></li>
+          <li><a href="index.html">Apache Tomcat</a></li>
+          <li><a href="index.html">Maven Build</a></li>
         </ul>
       </div>
     </div>
