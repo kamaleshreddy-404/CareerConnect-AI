@@ -16,6 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CareerConnect AI - College Placement & Recruitment Job Portal</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js"></script>
   
   <!-- React & Babel Runtime for AI Components -->
   <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
@@ -49,9 +50,9 @@
         <div class="search-input-group">
           <select name="category">
             <option value="0">All Categories</option>
-            <% for(Category cat : categories) { %>
+            <% if (categories != null) { for(Category cat : categories) { %>
               <option value="<%= cat.getId() %>"><%= cat.getName() %></option>
-            <% } %>
+            <% } } %>
           </select>
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Search Jobs</button>
@@ -81,17 +82,16 @@
       </div>
 
       <div class="grid grid-4">
-        <% for (int i = 0; i < Math.min(8, categories.size()); i++) { 
-            Category cat = categories.get(i);
+        <% if (categories != null && !categories.isEmpty()) { 
+            for (int i = 0; i < Math.min(8, categories.size()); i++) { 
+              Category cat = categories.get(i);
         %>
-          <a href="jobs.jsp?category=<%= cat.getId() %>" class="card" style="display: block; text-decoration: none;">
-            <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px;">
-              💻
-            </div>
-            <h3 style="font-size: 17px; margin-bottom: 6px;"><%= cat.getName() %></h3>
+          <a href="jobs.jsp?category=<%= cat.getId() %>" class="category-card">
+            <div class="category-icon">💻</div>
+            <h3><%= cat.getName() %></h3>
             <p style="font-size: 13px; color: var(--text-muted);"><%= cat.getDescription() %></p>
           </a>
-        <% } %>
+        <% } } %>
       </div>
     </section>
 
@@ -106,7 +106,7 @@
       </div>
 
       <div class="grid grid-2">
-        <% for(Job job : latestJobs) { %>
+        <% if (latestJobs != null) { for(Job job : latestJobs) { %>
           <div class="card job-card">
             <div>
               <div class="job-card-header">
@@ -133,7 +133,7 @@
               <a href="job-detail.jsp?id=<%= job.getId() %>" class="btn btn-outline btn-sm">Apply Now</a>
             </div>
           </div>
-        <% } %>
+        <% } } %>
       </div>
     </section>
 
@@ -143,16 +143,16 @@
       <p style="text-align: center; color: var(--text-muted); margin-bottom: 36px;">Trusted by leading enterprise software & AI research companies</p>
       
       <div class="grid grid-3">
-        <% for(Company comp : companies) { %>
-          <div class="card" style="text-align: center;">
-            <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--primary-light); color: var(--primary); font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-              <%= comp.getName().substring(0,1) %>
+        <% if (companies != null) { for(Company comp : companies) { %>
+          <div class="partner-card">
+            <div class="partner-logo">
+              <%= (comp.getName() != null && !comp.getName().isEmpty()) ? comp.getName().substring(0,1) : "C" %>
             </div>
             <h3 style="font-size: 18px; margin-bottom: 4px;"><%= comp.getName() %></h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;"><%= comp.getIndustry() %> • <%= comp.getLocation() %></p>
             <a href="jobs.jsp?keyword=<%= comp.getName() %>" class="btn btn-outline btn-sm">View Openings</a>
           </div>
-        <% } %>
+        <% } } %>
       </div>
     </section>
 
