@@ -74,7 +74,8 @@ CareerConnect AI/
             │   ├── app.js              # Theme switcher, Toast & Modal controls
             │   └── components.js       # React UI Components
             ├── includes/               # Reusable JSPs (navbar, footer, sidebar)
-            ├── index.jsp               # Landing Page
+            ├── index.html              # Primary Landing Page
+            ├── index.jsp               # JSP Landing Page
             ├── login.jsp               # Multi-role Login Page
             ├── register.jsp            # User/Recruiter Registration
             ├── jobs.jsp                # Job Directory & Filter Page
