@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter Portal - CareerConnect AI</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          <rect x="2" y="6" width="20" height="14" rx="2"/>
+        </svg>
+        CareerConnect <span class="logo-badge">AI</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="jobs.html" class="nav-link">Browse Jobs</a></li>
+        <li><a href="user-dashboard.html" class="nav-link">Candidate Portal</a></li>
+        <li><a href="recruiter-dashboard.html" class="nav-link active">Recruiter Portal</a></li>
+        <li><a href="admin-dashboard.html" class="nav-link">Admin Center</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="profile.html" style="display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700;">
+              T
+            </div>
+            TechCorp Recruiter
+          </a>
+          <a href="login.html?logout=true" class="btn btn-outline btn-sm">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding: 40px 24px;">
+    
+    <div class="dashboard-layout">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div style="text-align: center; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
+          <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; margin: 0 auto 12px;">
+            T
+          </div>
+          <h4 style="font-size: 16px;">TechCorp Recruiter</h4>
+          <span class="badge badge-applied" style="margin-top: 4px;">RECRUITER</span>
+        </div>
+
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="recruiter-dashboard.html" class="sidebar-link active">💼 Manage Postings</a></li>
+          <li class="sidebar-item"><a href="#applicants" class="sidebar-link">📄 Review Applicants</a></li>
+          <li class="sidebar-item"><a href="#" onclick="openModal('postJobModal'); return false;" class="sidebar-link">➕ Post Opening</a></li>
+          <li class="sidebar-item" style="margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+            <a href="login.html?logout=true" class="sidebar-link" style="color: var(--danger);">🚪 Sign Out</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <main>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h1 style="font-size: 28px;">Recruiter Control Center</h1>
+            <p style="color: var(--text-muted);">Manage placement job postings, screen candidates, and track applicants</p>
+          </div>
+          <button onclick="openModal('postJobModal')" class="btn btn-primary btn-lg">➕ Post New Job</button>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-3" style="margin-bottom: 32px;">
+          <div class="stat-card">
+            <div class="stat-icon">💼</div>
+            <div>
+              <div id="activeJobsCount" class="stat-val">2</div>
+              <div class="stat-label">Active Job Openings</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #e0f2fe; color: #0284c7;">👥</div>
+            <div>
+              <div class="stat-val">20</div>
+              <div class="stat-label">Received Applicants</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #d1fae5; color: #059669;">🎯</div>
+            <div>
+              <div class="stat-val">85%</div>
+              <div class="stat-label">Avg Candidate ATS Match</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Applicants Screening Section -->
+        <div id="applicants" class="card" style="margin-bottom: 32px;">
+          <h3 style="font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+            📄 Candidate Applicants Management
+          </h3>
+
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-muted);">
+                  <th style="padding: 12px;">Candidate</th>
+                  <th style="padding: 12px;">Applied For</th>
+                  <th style="padding: 12px;">AI Match Score</th>
+                  <th style="padding: 12px;">Resume</th>
+                  <th style="padding: 12px;">Current Status</th>
+                  <th style="padding: 12px;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="appRow1" style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 14px 12px;">
+                    <div style="font-weight: 600;">Alex Johnson</div>
+                    <div style="font-size: 12px; color: var(--text-muted);">alex.student@college.edu • 9876543213</div>
+                  </td>
+                  <td style="padding: 14px 12px; font-weight: 500;">Graduate Software Engineer (Java & React)</td>
+                  <td style="padding: 14px 12px;">
+                    <span class="tag tag-primary">88/100 ATS Match</span>
+                  </td>
+                  <td style="padding: 14px 12px;">
+                    <a href="download-resume?file=alex_johnson_resume.pdf" target="_blank" class="btn btn-outline btn-sm">
+                      📥 Resume PDF
+                    </a>
+                  </td>
+                  <td style="padding: 14px 12px;">
+                    <span id="appStatus1" class="badge badge-review">UNDER_REVIEW</span>
+                  </td>
+                  <td style="padding: 14px 12px;">
+                    <div style="display: flex; gap: 6px;">
+                      <button onclick="updateStatus(1, 'ACCEPTED')" class="btn btn-success btn-sm">Accept</button>
+                      <button onclick="updateStatus(1, 'REJECTED')" class="btn btn-danger btn-sm">Reject</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr id="appRow2" style="border-bottom: 1px solid var(--border-color);">
+                  <td style="padding: 14px 12px;">
+                    <div style="font-weight: 600;">Sarah Miller</div>
+                    <div style="font-size: 12px; color: var(--text-muted);">sarah.m@college.edu • 9876543214</div>
+                  </td>
+                  <td style="padding: 14px 12px; font-weight: 500;">Frontend Web Developer Intern</td>
+                  <td style="padding: 14px 12px;">
+                    <span class="tag tag-primary">94/100 ATS Match</span>
+                  </td>
+                  <td style="padding: 14px 12px;">
+                    <a href="download-resume?file=sarah_miller_resume.pdf" target="_blank" class="btn btn-outline btn-sm">
+                      📥 Resume PDF
+                    </a>
+                  </td>
+                  <td style="padding: 14px 12px;">
+                    <span id="appStatus2" class="badge badge-accepted">ACCEPTED</span>
+                  </td>
+                  <td style="padding: 14px 12px;">
+                    <div style="display: flex; gap: 6px;">
+                      <button onclick="updateStatus(2, 'ACCEPTED')" class="btn btn-success btn-sm">Accept</button>
+                      <button onclick="updateStatus(2, 'REJECTED')" class="btn btn-danger btn-sm">Reject</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Active Postings -->
+        <div class="card">
+          <h3 style="font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+            💼 My Active Job Postings
+          </h3>
+
+          <div id="recruiterPostingsGrid" class="grid grid-2">
+            <div id="jobCard1" class="card job-card" style="background: var(--bg-subtle);">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                  <h4 style="font-size: 17px;">Graduate Software Engineer (Java & React)</h4>
+                  <span class="tag tag-primary">FULL_TIME</span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Bangalore, India • ₹8,00,000 - ₹12,00,000 LPA</p>
+              </div>
+              <div class="job-card-footer">
+                <span style="font-size: 13px; font-weight: 600;">12 Applicants</span>
+                <button onclick="deleteJobCard('jobCard1')" class="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </div>
+
+            <div id="jobCard2" class="card job-card" style="background: var(--bg-subtle);">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                  <h4 style="font-size: 17px;">Frontend Web Developer Intern</h4>
+                  <span class="tag tag-primary">INTERNSHIP</span>
+                </div>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Hybrid - Bangalore • ₹25,000 / month Stipend</p>
+              </div>
+              <div class="job-card-footer">
+                <span style="font-size: 13px; font-weight: 600;">8 Applicants</span>
+                <button onclick="deleteJobCard('jobCard2')" class="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Create Job Modal -->
+  <div id="postJobModal" class="modal-overlay">
+    <div class="modal" style="max-width: 680px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-size: 20px;">Post New Placement Opening</h3>
+        <button onclick="closeModal('postJobModal')" style="background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <form onsubmit="event.preventDefault(); publishNewJob();">
+        <div class="form-group">
+          <label class="form-label">Job Title</label>
+          <input type="text" id="newJobTitle" class="form-control" placeholder="e.g. Full Stack Java Developer" required>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="newJobCat" class="form-control" required>
+              <option value="Software Engineering">Software Engineering</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Data Science">Data Science</option>
+              <option value="AI / Machine Learning">AI / Machine Learning</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Job Type</label>
+            <select id="newJobType" class="form-control" required>
+              <option value="FULL_TIME">Full Time</option>
+              <option value="INTERNSHIP">Internship</option>
+              <option value="REMOTE">Remote</option>
+              <option value="CONTRACT">Contract</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="form-group">
+            <label class="form-label">Location</label>
+            <input type="text" id="newJobLoc" class="form-control" placeholder="Bangalore, India" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Salary Package / Stipend</label>
+            <input type="text" id="newJobSalary" class="form-control" placeholder="₹9,00,000 LPA" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Job Description</label>
+          <textarea id="newJobDesc" class="form-control" rows="3" required placeholder="Describe role responsibilities..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+          <button type="button" onclick="closeModal('postJobModal')" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-primary">Publish Opening</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 CareerConnect AI. Recruiter Employer Portal.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    function updateStatus(id, newStatus) {
+      const badge = document.getElementById('appStatus' + id);
+      badge.textContent = newStatus;
+      badge.className = 'badge badge-' + (newStatus === 'ACCEPTED' ? 'accepted' : 'rejected');
+      showToast('Applicant status updated to ' + newStatus, newStatus === 'ACCEPTED' ? 'success' : 'info');
+    }
+
+    function deleteJobCard(cardId) {
+      if (confirm('Delete this job posting?')) {
+        document.getElementById(cardId).remove();
+        showToast('Job posting removed.', 'info');
+      }
+    }
+
+    function publishNewJob() {
+      const title = document.getElementById('newJobTitle').value;
+      const type = document.getElementById('newJobType').value;
+      const loc = document.getElementById('newJobLoc').value;
+      const salary = document.getElementById('newJobSalary').value;
+
+      const grid = document.getElementById('recruiterPostingsGrid');
+      const newCard = document.createElement('div');
+      newCard.className = 'card job-card';
+      newCard.style.background = 'var(--bg-subtle)';
+      newCard.innerHTML = `
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <h4 style="font-size: 17px;">${title}</h4>
+            <span class="tag tag-primary">${type}</span>
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">${loc} • ${salary}</p>
+        </div>
+        <div class="job-card-footer">
+          <span style="font-size: 13px; font-weight: 600;">0 Applicants</span>
+          <button onclick="this.closest('.job-card').remove(); showToast('Job posting removed.', 'info');" class="btn btn-danger btn-sm">Delete</button>
+        </div>
+      `;
+
+      grid.prepend(newCard);
+      closeModal('postJobModal');
+      showToast('Job posting created successfully!', 'success');
+    }
+  </script>
+</body>
+</html>

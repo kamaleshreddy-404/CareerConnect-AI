@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Profile - CareerConnect AI</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          <rect x="2" y="6" width="20" height="14" rx="2"/>
+        </svg>
+        CareerConnect <span class="logo-badge">AI</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="jobs.html" class="nav-link">Browse Jobs</a></li>
+        <li><a href="user-dashboard.html" class="nav-link">Candidate Portal</a></li>
+        <li><a href="recruiter-dashboard.html" class="nav-link">Recruiter Portal</a></li>
+        <li><a href="admin-dashboard.html" class="nav-link">Admin Center</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="profile.html" style="display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px;">
+            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700;">
+              A
+            </div>
+            Alex Johnson
+          </a>
+          <a href="login.html?logout=true" class="btn btn-outline btn-sm">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding: 40px 24px;">
+    
+    <div class="dashboard-layout">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div style="text-align: center; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
+          <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; margin: 0 auto 12px;">
+            A
+          </div>
+          <h4 style="font-size: 16px;">Alex Johnson</h4>
+          <span class="badge badge-applied" style="margin-top: 4px;">JOB_SEEKER</span>
+        </div>
+
+        <ul class="sidebar-menu">
+          <li class="sidebar-item"><a href="user-dashboard.html" class="sidebar-link">🚀 Overview</a></li>
+          <li class="sidebar-item"><a href="user-dashboard.html#applications" class="sidebar-link">📋 My Applications</a></li>
+          <li class="sidebar-item"><a href="user-dashboard.html#ai-score" class="sidebar-link">✨ AI Resume Analyzer</a></li>
+          <li class="sidebar-item"><a href="profile.html" class="sidebar-link active">👤 Profile Settings</a></li>
+          <li class="sidebar-item" style="margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 16px;">
+            <a href="login.html?logout=true" class="sidebar-link" style="color: var(--danger);">🚪 Sign Out</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Profile Editor -->
+      <main>
+        
+        <div style="margin-bottom: 28px;">
+          <h1 style="font-size: 28px;">Candidate Profile & Resume Management</h1>
+          <p style="color: var(--text-muted);">Keep your contact info, education, and resume up to date for campus recruiters</p>
+        </div>
+
+        <!-- Personal Info -->
+        <div class="card" style="margin-bottom: 32px;">
+          <h3 style="font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+            👤 Personal & Contact Information
+          </h3>
+
+          <form onsubmit="event.preventDefault(); showToast('Profile updated successfully!', 'success');">
+            <div class="grid grid-2">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" value="Alex Johnson" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address (Read-only)</label>
+                <input type="email" value="alex.student@college.edu" class="form-control" readonly>
+              </div>
+            </div>
+
+            <div class="grid grid-2">
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" value="9876543213">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Account Role</label>
+                <input type="text" value="JOB_SEEKER" class="form-control" readonly>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Professional Summary / Bio</label>
+              <textarea class="form-control" rows="3">Final year Computer Science student specializing in Java & React Web Development.</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+          </form>
+        </div>
+
+        <!-- Resume PDF Manager -->
+        <div class="card" style="margin-bottom: 32px;">
+          <h3 style="font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+            📄 Resume PDF Manager
+          </h3>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-subtle); padding: 20px; border-radius: var(--radius-md);">
+            <div>
+              <h4 style="font-size: 16px;">alex_johnson_resume.pdf</h4>
+              <p style="font-size: 13px; color: var(--text-muted);">PDF Document • ATS Score 88%</p>
+            </div>
+            <a href="download-resume?file=alex_johnson_resume.pdf" target="_blank" class="btn btn-outline">
+              Preview Resume PDF
+            </a>
+          </div>
+        </div>
+
+        <!-- Education & Experience -->
+        <div class="card">
+          <h3 style="font-size: 20px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+            🎓 Education & Internships
+          </h3>
+
+          <div style="margin-bottom: 24px;">
+            <h4 style="font-size: 16px; margin-bottom: 12px; color: var(--primary);">Academic Degree</h4>
+            <div style="padding: 12px; border-left: 3px solid var(--primary); background: var(--bg-subtle); margin-bottom: 8px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+              <div style="font-weight: 600;">B.Tech in Computer Science — 8.9 CGPA</div>
+              <div style="font-size: 13px; color: var(--text-muted);">State Institute of Technology (2021 - 2025)</div>
+            </div>
+          </div>
+
+          <div>
+            <h4 style="font-size: 16px; margin-bottom: 12px; color: var(--primary);">Internship & Work Experience</h4>
+            <div style="padding: 12px; border-left: 3px solid var(--success); background: var(--bg-subtle); margin-bottom: 8px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+              <div style="font-weight: 600;">Software Engineer Intern at DevSolutions Inc</div>
+              <div style="font-size: 13px; color: var(--text-muted);">Remote (2024-05 to 2024-08)</div>
+              <p style="font-size: 13px; margin-top: 4px;">Developed REST APIs using Java Servlets, React, and MySQL databases.</p>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>© 2026 CareerConnect AI. Candidate Profile Settings.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

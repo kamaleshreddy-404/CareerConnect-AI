@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Jobs & Placement Opportunities - CareerConnect AI</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          <rect x="2" y="6" width="20" height="14" rx="2"/>
+        </svg>
+        CareerConnect <span class="logo-badge">AI</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="jobs.html" class="nav-link active">Browse Jobs</a></li>
+        <li><a href="user-dashboard.html" class="nav-link">Candidate Portal</a></li>
+        <li><a href="recruiter-dashboard.html" class="nav-link">Recruiter Portal</a></li>
+        <li><a href="admin-dashboard.html" class="nav-link">Admin Center</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <a href="login.html" class="btn btn-outline">Log In</a>
+        <a href="register.html" class="btn btn-primary">Register</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding: 40px 24px;">
+    
+    <div style="margin-bottom: 32px;">
+      <h1 style="font-size: 32px;">Explore Placement Opportunities</h1>
+      <p style="color: var(--text-muted);">Find entry-level roles, internships, and campus drives matching your skill set</p>
+    </div>
+
+    <div class="dashboard-layout" style="padding: 0;">
+      
+      <!-- Filter Sidebar -->
+      <aside class="sidebar">
+        <h3 style="font-size: 18px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">
+          🔍 Filter Openings
+        </h3>
+
+        <form id="filterForm" onsubmit="event.preventDefault(); applyJobFilters();">
+          <div class="form-group">
+            <label class="form-label">Keyword Search</label>
+            <input type="text" id="filterKeyword" class="form-control" placeholder="Job title or skill (e.g. Java, React)..." oninput="applyJobFilters()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="filterCategory" class="form-control" onchange="applyJobFilters()">
+              <option value="ALL">All Categories</option>
+              <option value="Software Engineering">Software Engineering</option>
+              <option value="Data Science">Data Science</option>
+              <option value="AI / Machine Learning">AI / Machine Learning</option>
+              <option value="Cloud Computing">Cloud Computing</option>
+              <option value="Cyber Security">Cyber Security</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Mobile Development">Mobile Development</option>
+              <option value="UI UX Design">UI UX Design</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Location</label>
+            <input type="text" id="filterLocation" class="form-control" placeholder="City or Remote..." oninput="applyJobFilters()">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Employment Type</label>
+            <select id="filterType" class="form-control" onchange="applyJobFilters()">
+              <option value="ALL">All Types</option>
+              <option value="FULL_TIME">Full Time</option>
+              <option value="INTERNSHIP">Internship</option>
+              <option value="REMOTE">Remote</option>
+              <option value="CONTRACT">Contract</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Apply Filters</button>
+          <button type="button" onclick="resetFilters()" class="btn btn-outline" style="width: 100%; margin-top: 8px;">Clear Filters</button>
+        </form>
+      </aside>
+
+      <!-- Jobs Grid -->
+      <main>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3 id="jobCountText" style="font-size: 18px;">4 Jobs Available</h3>
+        </div>
+
+        <div id="jobsGrid" class="grid grid-2">
+          <!-- Job Card 1 -->
+          <div class="card job-card" data-title="Graduate Software Engineer (Java & React)" data-company="TechCorp Innovations" data-category="Software Engineering" data-location="Bangalore, India" data-type="FULL_TIME">
+            <div>
+              <div class="job-card-header">
+                <div class="company-logo">T</div>
+                <div class="job-info">
+                  <h3><a href="job-detail.html?id=1">Graduate Software Engineer (Java & React)</a></h3>
+                  <div class="company-name">TechCorp Innovations • Bangalore, India</div>
+                </div>
+              </div>
+              <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
+                We are looking for passionate graduate engineers to join our flagship cloud products team using Java Servlets, Spring, and React.
+              </p>
+              <div class="job-tags">
+                <span class="tag tag-primary">Software Engineering</span>
+                <span class="tag">FULL_TIME</span>
+                <span class="tag tag-success">12 Applicants</span>
+              </div>
+            </div>
+            <div class="job-card-footer">
+              <div class="salary">₹8,00,000 - ₹12,00,000 LPA</div>
+              <a href="job-detail.html?id=1" class="btn btn-outline btn-sm">View & Apply</a>
+            </div>
+          </div>
+
+          <!-- Job Card 2 -->
+          <div class="card job-card" data-title="Frontend Web Developer Intern" data-company="TechCorp Innovations" data-category="Web Development" data-location="Hybrid - Bangalore" data-type="INTERNSHIP">
+            <div>
+              <div class="job-card-header">
+                <div class="company-logo">T</div>
+                <div class="job-info">
+                  <h3><a href="job-detail.html?id=2">Frontend Web Developer Intern</a></h3>
+                  <div class="company-name">TechCorp Innovations • Hybrid - Bangalore</div>
+                </div>
+              </div>
+              <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
+                Exciting 6-month internship opportunity for students skilled in React, HTML5, CSS3, and JavaScript. High conversion possibility.
+              </p>
+              <div class="job-tags">
+                <span class="tag tag-primary">Web Development</span>
+                <span class="tag">INTERNSHIP</span>
+                <span class="tag tag-success">8 Applicants</span>
+              </div>
+            </div>
+            <div class="job-card-footer">
+              <div class="salary">₹25,000 / month Stipend</div>
+              <a href="job-detail.html?id=2" class="btn btn-outline btn-sm">View & Apply</a>
+            </div>
+          </div>
+
+          <!-- Job Card 3 -->
+          <div class="card job-card" data-title="Junior Data Analyst" data-company="GlobalSoft Solutions" data-category="Data Science" data-location="Hyderabad, India" data-type="FULL_TIME">
+            <div>
+              <div class="job-card-header">
+                <div class="company-logo">G</div>
+                <div class="job-info">
+                  <h3><a href="job-detail.html?id=3">Junior Data Analyst</a></h3>
+                  <div class="company-name">GlobalSoft Solutions • Hyderabad, India</div>
+                </div>
+              </div>
+              <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
+                Join GlobalSoft AI analytics group to extract business insights from complex big data streams using SQL and Python.
+              </p>
+              <div class="job-tags">
+                <span class="tag tag-primary">Data Science</span>
+                <span class="tag">FULL_TIME</span>
+                <span class="tag tag-success">15 Applicants</span>
+              </div>
+            </div>
+            <div class="job-card-footer">
+              <div class="salary">₹7,50,000 - ₹10,00,000 LPA</div>
+              <a href="job-detail.html?id=3" class="btn btn-outline btn-sm">View & Apply</a>
+            </div>
+          </div>
+
+          <!-- Job Card 4 -->
+          <div class="card job-card" data-title="AI Systems Developer Trainee" data-company="Nexus AI Labs" data-category="AI / Machine Learning" data-location="Pune, India" data-type="REMOTE">
+            <div>
+              <div class="job-card-header">
+                <div class="company-logo">N</div>
+                <div class="job-info">
+                  <h3><a href="job-detail.html?id=4">AI Systems Developer Trainee</a></h3>
+                  <div class="company-name">Nexus AI Labs • Pune, India (Remote)</div>
+                </div>
+              </div>
+              <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
+                Build next-gen Generative AI and NLP workflows. Excellent opportunity for college graduates with strong algorithmic background.
+              </p>
+              <div class="job-tags">
+                <span class="tag tag-primary">AI / Machine Learning</span>
+                <span class="tag">REMOTE</span>
+                <span class="tag tag-success">24 Applicants</span>
+              </div>
+            </div>
+            <div class="job-card-footer">
+              <div class="salary">₹10,00,000 - ₹15,00,000 LPA</div>
+              <a href="job-detail.html?id=4" class="btn btn-outline btn-sm">View & Apply</a>
+            </div>
+          </div>
+        </div>
+
+        <div id="noJobsMsg" class="card" style="display: none; text-align: center; padding: 60px 20px;">
+          <h3>No jobs found matching your search criteria.</h3>
+          <p style="color: var(--text-muted); margin-top: 8px;">Try clearing filters or searching for different keywords.</p>
+          <button onclick="resetFilters()" class="btn btn-primary" style="margin-top: 16px;">Reset Filters</button>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="footer-logo">CareerConnect AI</div>
+          <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px; max-width: 340px;">
+            Next-generation AI-powered placement and recruitment platform connecting college talent with top enterprise recruiters.
+          </p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="tag tag-primary">Java Servlets</span>
+            <span class="tag tag-primary">JSP & MVC</span>
+            <span class="tag tag-primary">React UI</span>
+            <span class="tag tag-primary">MySQL</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Job Seekers</h4>
+          <ul class="footer-links">
+            <li><a href="jobs.html">Browse Jobs</a></li>
+            <li><a href="user-dashboard.html">AI Resume Optimizer</a></li>
+            <li><a href="jobs.html?type=INTERNSHIP">Campus Internships</a></li>
+            <li><a href="register.html">Create Account</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Recruiters</h4>
+          <ul class="footer-links">
+            <li><a href="register.html?tab=recruiter">Post Openings</a></li>
+            <li><a href="recruiter-dashboard.html">Applicant Dashboard</a></li>
+            <li><a href="recruiter-dashboard.html">Candidate Search</a></li>
+            <li><a href="login.html">Employer Login</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform & Tech</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">MVC Architecture</a></li>
+            <li><a href="index.html">JDBC Connection</a></li>
+            <li><a href="index.html">Apache Tomcat</a></li>
+            <li><a href="index.html">Maven Build</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 CareerConnect AI. Full Stack Java MVC Recruitment Portal.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    function applyJobFilters() {
+      const kw = document.getElementById('filterKeyword').value.toLowerCase().trim();
+      const cat = document.getElementById('filterCategory').value;
+      const loc = document.getElementById('filterLocation').value.toLowerCase().trim();
+      const type = document.getElementById('filterType').value;
+
+      const cards = document.querySelectorAll('#jobsGrid .job-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        const company = card.getAttribute('data-company').toLowerCase();
+        const category = card.getAttribute('data-category');
+        const location = card.getAttribute('data-location').toLowerCase();
+        const jobType = card.getAttribute('data-type');
+
+        let matchKw = !kw || title.includes(kw) || company.includes(kw) || location.includes(kw);
+        let matchCat = cat === 'ALL' || category === cat;
+        let matchLoc = !loc || location.includes(loc);
+        let matchType = type === 'ALL' || jobType === type;
+
+        if (matchKw && matchCat && matchLoc && matchType) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('jobCountText').textContent = visibleCount + ' Jobs Found';
+      document.getElementById('noJobsMsg').style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    function resetFilters() {
+      document.getElementById('filterKeyword').value = '';
+      document.getElementById('filterCategory').value = 'ALL';
+      document.getElementById('filterLocation').value = '';
+      document.getElementById('filterType').value = 'ALL';
+      applyJobFilters();
+    }
+
+    // Auto apply URL search params if present
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const kwParam = params.get('keyword');
+      const catParam = params.get('category');
+      const typeParam = params.get('type');
+      if (kwParam) document.getElementById('filterKeyword').value = kwParam;
+      if (typeParam) document.getElementById('filterType').value = typeParam;
+      applyJobFilters();
+    });
+  </script>
+</body>
+</html>
