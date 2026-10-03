@@ -101,7 +101,7 @@
               <h4 style="font-size: 16px;"><%= user.getName().toLowerCase().replace(" ", "_") %>_resume.pdf</h4>
               <p style="font-size: 13px; color: var(--text-muted);">PDF Document • ATS Score 88%</p>
             </div>
-            <a href="download-resume?file=<%= user.getName().toLowerCase().replace(" ", "_") %>_resume.pdf" target="_blank" class="btn btn-outline">
+            <a href="uploads/resumes/<%= user.getName().toLowerCase().replace(" ", "_") %>_resume.pdf" target="_blank" class="btn btn-outline">
               Preview Resume PDF
             </a>
           </div>

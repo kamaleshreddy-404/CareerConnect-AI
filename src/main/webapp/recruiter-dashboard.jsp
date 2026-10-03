@@ -137,7 +137,7 @@
                         <span class="tag tag-primary"><%= app.getAiScore() %>/100 ATS Match</span>
                       </td>
                       <td style="padding: 14px 12px;">
-                        <a href="download-resume?file=<%= app.getResumePath() %>" target="_blank" class="btn btn-outline btn-sm">
+                        <a href="uploads/resumes/<%= app.getResumePath() %>" target="_blank" class="btn btn-outline btn-sm">
                           📥 Resume PDF
                         </a>
                       </td>

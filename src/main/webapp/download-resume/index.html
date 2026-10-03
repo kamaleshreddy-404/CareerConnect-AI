@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerConnect AI - Candidate Resume PDF</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg-color, #0f172a);
+      color: var(--text-color, #f8fafc);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .header-bar {
+      background: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color, #334155);
+      z-index: 10;
+    }
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .title-text {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .action-btns {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #475569;
+      color: #cbd5e1;
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+    }
+    iframe {
+      flex: 1;
+      width: 100%;
+      height: calc(100vh - 60px);
+      border: none;
+      background: #ffffff;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const params = new URLSearchParams(window.location.search);
+      let fileName = params.get("file") || "alex_johnson_resume.pdf";
+      fileName = fileName.split('/').pop().split('\\').pop();
+      if (!fileName || fileName.trim() === '') fileName = "alex_johnson_resume.pdf";
+      
+      const pdfPath = "../uploads/resumes/" + fileName;
+      
+      document.getElementById("pdfTitle").innerText = "Candidate Resume: " + fileName;
+      document.getElementById("downloadBtn").href = pdfPath;
+      document.getElementById("pdfViewer").src = pdfPath;
+    });
+  </script>
+</head>
+<body>
+  <div class="header-bar">
+    <div class="title-group">
+      <span style="font-size: 22px;">📄</span>
+      <strong id="pdfTitle" class="title-text">Candidate Resume PDF</strong>
+    </div>
+    <div class="action-btns">
+      <a href="javascript:history.back()" class="btn btn-outline">← Back</a>
+      <a id="downloadBtn" href="../uploads/resumes/alex_johnson_resume.pdf" target="_blank" download class="btn btn-primary">📥 Download PDF</a>
+    </div>
+  </div>
+  <iframe id="pdfViewer" title="Candidate Resume PDF Viewer"></iframe>
+</body>
+</html>
