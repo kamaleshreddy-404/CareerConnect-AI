@@ -127,10 +127,10 @@ class RemainingControllersTest {
 
         servlet.doGet(request.proxy(), response.proxy());
 
-        assertEquals("application/pdf", response.contentTypeBeforeFallback);
+        assertEquals("application/pdf", response.contentType);
         assertTrue(response.contentDisposition.contains("resume.pdf"));
         assertFalse(response.contentDisposition.contains("private"));
-        assertTrue(response.body().contains("Resume File: <strong>resume.pdf</strong>"));
+        assertTrue(response.body().contains("resume.pdf"));
     }
 
     private static HttpSession sessionFor(String role) {
@@ -214,6 +214,20 @@ class RemainingControllersTest {
                         if ("Content-Disposition".equals(args[0])) contentDisposition = (String) args[1];
                     }
                     case "getWriter" -> { return new PrintWriter(writer); }
+                    case "getOutputStream" -> {
+                        return new javax.servlet.ServletOutputStream() {
+                            @Override
+                            public boolean isReady() { return true; }
+                            @Override
+                            public void setWriteListener(javax.servlet.WriteListener writeListener) {}
+                            @Override
+                            public void write(int b) { writer.write(b); }
+                            @Override
+                            public void write(byte[] b, int off, int len) {
+                                writer.write(new String(b, off, len, java.nio.charset.StandardCharsets.UTF_8));
+                            }
+                        };
+                    }
                     default -> { }
                 }
                 return defaultValue(method.getReturnType());
